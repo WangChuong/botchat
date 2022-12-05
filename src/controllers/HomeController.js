@@ -266,12 +266,43 @@ let setupPersistentMenu = async (req, res) => {
 let handleDatlich = async (req, res) => {
     return res.render('datlich.ejs');
 }
+
+let handleDatlichAjax = async (req, res) => {
+    try {
+        let customerName = "";
+        if (req.body.customerName === "") {
+            customerName = "Để trống";
+        } else customerName = req.body.customerName;
+
+
+        let response1 = {
+            "text": `---Thông tin người dùng đặt lịch---
+            \nHọ tên: ${customerName}
+            \nEmail: ${req.body.email}
+            \nSố điện thoại: ${req.body.orderNumber}
+            `
+        };
+
+
+        await chatbotService.callSendAPI(req.body.psid, response1);
+
+        return res.status(200).json({
+            message: "ok"
+        });
+    } catch (e) {
+        console.log('Lỗi: ', e)
+        return res.status(500).json({
+            message: "server error!!!"
+        });
+    }
+}
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
     setupPersistentMenu: setupPersistentMenu,
-    handleDatlich: handleDatlich
+    handleDatlich: handleDatlich,
+    handleDatlichAjax: handleDatlichAjax,
 
 }
