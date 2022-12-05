@@ -18,7 +18,7 @@ window.extAsyncInit = function () {
         },
         function error(err) {
             // error
-            console.log('Lỗi đặt bàn Eric bot', err);
+            console.log('Lỗi đặt lịch bot', err);
         }
     );
 };
