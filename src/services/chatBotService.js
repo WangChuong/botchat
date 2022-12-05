@@ -8,7 +8,7 @@ const IMAGE_GET_STARTED1 = 'shorturl.at/krwY3';
 const IMAGE_GET_STARTED2 = 'shorturl.at/krwY3';
 const IMAGE_GET_STARTED3 = 'shorturl.at/krwY3';
 const IMAGE_GET_STARTED4 = 'shorturl.at/krwY3';
-let callSendAPI = (sender_psid, response) => {
+let callSendAPI = async (sender_psid, response) => {
     // Construct the message body
     let request_body = {
         "recipient": {
@@ -16,7 +16,8 @@ let callSendAPI = (sender_psid, response) => {
         },
         "message": response
     }
-
+    await sendMarkReadMessage(sender_psid);
+    await sendTypingOn(sender_psid);
     // Send the HTTP request to the Messenger Platform
     request({
         "uri": "https://graph.facebook.com/v9.0/me/messages",
@@ -28,6 +29,54 @@ let callSendAPI = (sender_psid, response) => {
             console.log('message sent!')
         } else {
             console.error("Unable to send message:" + err);
+        }
+    });
+}
+
+let sendTypingOn = (sender_psid) => {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "sender_action": "typing_on"
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v9.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sendTypingOn!')
+        } else {
+            console.error("Unable to sendTypingOn message:" + err);
+        }
+    });
+}
+
+let sendMarkReadMessage = (sender_psid) => {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "sender_action": "mark_seen"
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v9.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sendMarkReadMessage!')
+        } else {
+            console.error("Unable to sendMarkReadMessage message:" + err);
         }
     });
 }
@@ -297,7 +346,7 @@ let getMainMenuTemplateCSVC1 = () => {
                         "title": "Xin chào mừng bạn đến với Bookingcare",
                         "subtitle": "Sau đây là thông tin về bệnh viện của chúng tôi ",
                         "image_url": IMAGE_GET_STARTED1,
-                       
+
                     },
                     {
                         "title": "Quay lại",
@@ -329,7 +378,7 @@ let getMainMenuTemplateCSVC2 = () => {
                         "title": "Xin chào mừng bạn đến với Bookingcare",
                         "subtitle": "Sau đây là thông tin về cơ sở vật chất của chúng tôi ",
                         "image_url": IMAGE_GET_STARTED0101,
-                       
+
                     },
                     {
                         "title": "Quay lại",
