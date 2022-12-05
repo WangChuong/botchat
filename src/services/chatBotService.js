@@ -134,9 +134,11 @@ let sendGetStartedTemplate = () => {
                             "payload": "MAIN_MENU",
                         },
                         {
-                            "type": "postback",
-                            "title": "Đặt lịch!",
-                            "payload": "RESERVE",
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}`,
+                            "title": "Đặt BÀN!",
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true
                         },
                         {
                             "type": "postback",
@@ -193,9 +195,11 @@ let getMainMenuTemplate = () => {
                         "image_url": IMAGE_GET_STARTED2,
                         "buttons": [
                             {
-                                "type": "postback",
-                                "title": "Đặt lịch!",
-                                "payload": "RESERVE",
+                                "type": "web_url",
+                                "url": `${process.env.URL_WEB_VIEW_ORDER}`,
+                                "title": "Đặt BÀN!",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true
                             }
                         ],
                     },

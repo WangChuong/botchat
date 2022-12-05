@@ -226,8 +226,8 @@ let setupPersistentMenu = async (req, res) => {
                 "call_to_actions": [
                     {
                         "type": "web_url",
-                        "title": "Talk to an agent",
-                        "url": "https://www.facebook.com/kinzuss",
+                        "title": "My Github",
+                        "url": "https://github.com/WangChuong",
                         "webview_height_ratio": "full"
                     },
                     {
@@ -262,11 +262,16 @@ let setupPersistentMenu = async (req, res) => {
     });
     return res.send("setup persistent menu succeed!");
 }
+
+let handleDatlich = async (req, res) => {
+    return res.render('datlich.ejs');
+}
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
-    setupPersistentMenu: setupPersistentMenu
+    setupPersistentMenu: setupPersistentMenu,
+    handleDatlich: handleDatlich
 
 }
