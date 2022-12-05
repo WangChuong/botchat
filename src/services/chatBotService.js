@@ -136,7 +136,7 @@ let sendGetStartedTemplate = () => {
                         {
                             "type": "web_url",
                             "url": `${process.env.URL_WEB_VIEW_ORDER}`,
-                            "title": "Đặt BÀN!",
+                            "title": "Đặt LỊCH!",
                             "webview_height_ratio": "tall",
                             "messenger_extensions": true
                         },
@@ -197,7 +197,7 @@ let getMainMenuTemplate = () => {
                             {
                                 "type": "web_url",
                                 "url": `${process.env.URL_WEB_VIEW_ORDER}`,
-                                "title": "Đặt BÀN!",
+                                "title": "Đặt LỊCH!",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true
                             }
